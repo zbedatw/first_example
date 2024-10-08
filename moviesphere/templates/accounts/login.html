@@ -1,0 +1,45 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<div class="glass-container">
+    <div class="content">
+        <!-- Welcome text section on the left -->
+        <div class="welcome-text">
+            <h1>Discover, Review, and Explore the best movies from around the world.</h1>
+            <p>Your gateway to an extraordinary cinematic journey begins here!</p>
+        </div>
+
+        <!-- Login form section on the right -->
+        <div class="login-form-container">
+            <form class="site-form" action="{% url 'accounts:login' %}" method="post">
+                {% csrf_token %}
+
+                <!-- Username Field -->
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    <input type="text" name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}" class="form-control" placeholder="Username" required>
+                    {% for error in form.username.errors %}
+                        <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    <input type="password" name="{{ form.password.name }}" class="form-control" placeholder="Password" required>
+                    {% for error in form.password.errors %}
+                        <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn-submit-login">Sign in</button>
+
+                <div class="signup-redirect">
+                    <p>Don't have an account?
+                        <a href="{% url 'accounts:signup' %}" class="btn-signup-link">Signup here</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

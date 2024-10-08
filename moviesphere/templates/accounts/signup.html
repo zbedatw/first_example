@@ -1,0 +1,51 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="signup-wrapper">
+    <!-- Background image under the form -->
+    <div class="signup-image-overlay">
+        <img src="{% static 'movie_signup.jpg' %}" alt="Signup for Movies" class="signup-background">
+    </div>
+
+    <!-- Signup form container -->
+    <div class="signup-form-container">
+        <h1 class="signup-heading">Sign up</h1>
+        <p class="signup-subtitle">Join our community and stay updated with the latest releases and exclusive content!</p>
+        <form class="signup-form" action="{% url 'accounts:signup' %}" method="post">
+            {% csrf_token %}
+
+            <!-- Username Field -->
+            <div class="form-group">
+                <input type="text" name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}" class="form-control signup-input" placeholder="User Name" required>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <input type="email" name="{{ form.email.name }}" value="{{ form.email.value|default_if_none:'' }}" class="form-control signup-input" placeholder="Email" required>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <input type="password" name="{{ form.password.name }}" class="form-control signup-input" placeholder="Password" required>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+                <input type="password" name="{{ form.confirm_password.name }}" class="form-control signup-input" placeholder="Confirm Password" required>
+            </div>
+
+             <!-- Submit Button (Centered) -->
+            <div class="signup-buttons">
+                <button type="submit" class="btn-signup">Sign Up</button>
+            </div>
+
+            <!-- Already have an account? Sign in section -->
+            <div class="signin-redirect">
+                <p>Already have an account?
+                    <a href="{% url 'accounts:login' %}" class="btn-signin-link">Sign in</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,677 @@
+/* General styling */
+body {
+    background: #343a40;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 70px;  /* Add padding to prevent content from hiding under the navbar */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between logo and user options */
+    background-color: #333;
+    padding: 10px 20px;
+    color: #f2f2f2;
+    position: fixed;  /* Fix the navbar at the top */
+    top: 0;  /* Position it at the top of the page */
+    width: 100%;  /* Ensure it spans the entire width */
+    z-index: 1000;  /* Keep it above other content */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Logo section */
+.logo {
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+/* Style for the logo image to make it circular */
+.logo-image {
+    border-radius: 20%; /* Makes the image circular */
+    width: 55px; /* Adjust width to match height for a perfect circle */
+    height: 40px; /* Set explicit height if needed to ensure a circle */
+}
+
+/* User options on the right */
+.user-options {
+    display: flex;
+    align-items: center; /* Center the items vertically */
+    margin-left: auto; /* Push user options to the right */
+}
+
+.greeting {
+    margin-right: 10px; /* Space between greeting and logout button */
+    white-space: nowrap; /* Prevent wrapping */
+    display: inline-flex; /* Keep greeting and logout inline */
+}
+
+/* Additional styling for the username */
+.greeting strong {
+    margin-left: 5px; /* Space between "Hello" and username */
+}
+
+/* Logout button */
+.logout-btn {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.logout-btn:hover {
+    color: darkblue;
+}
+
+.user-options a {
+    color: #f2f2f2;
+    text-decoration: none;
+    margin-left: 15px; /* Space between links */
+}
+
+.user-options a:hover {
+    text-decoration: underline;
+}
+
+/* Button styles */
+.user-options button {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: blue; /* Text color */
+    text-decoration: underline; /* Underline text */
+    cursor: pointer; /* Pointer cursor */
+    margin-left: 15px; /* Space between buttons */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.user-options button:hover {
+    color: darkblue; /* Darker blue on hover */
+}
+/* Clear button (X) styling */
+.clear-btn {
+    background-color: #f44336; /* Red color for the X button */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 5px;
+    border-radius: 50%; /* Make it circular */
+}
+
+.clear-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Vertical separator */
+.separator {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #f2f2f2;
+}
+
+/*login page */
+.glass-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.01); /* Almost fully transparent */
+    border-radius: 20px; /* Round corners */
+    backdrop-filter: blur(30px); /* Strong glass effect */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for contrast */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Soft border for definition */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: row; /* Align items in a row */
+}
+
+/* Content container */
+.content {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    width: 100%;
+}
+
+/* Welcome text styling */
+.welcome-text {
+    flex: 1; /* Take available space */
+    padding: 20px; /* Add padding */
+}
+
+.welcome-text h1 {
+    font-family: Monaco, monospace; /* Set font to Monaco */
+    font-style: italic; /* Change font style */
+    font-size: 24px; /* Smaller font size */
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    line-height: 1.2; /* Adjust line height for spacing */
+}
+
+.welcome-text p {
+    font-size: 16px; /* Smaller font size */
+    color: #ddd;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    font-style: italic; /* Change font style */
+    line-height: 1.4; /* Adjust line height for better readability */
+}
+
+
+/* Login form container with glass effect */
+.login-form-container {
+    background: rgba(255, 255, 255, 0.05); /* Very transparent */
+    padding: 30px;
+    border-radius: 15px; /* Round corners */
+    backdrop-filter: blur(25px); /* Stronger blur */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+    width: 400px; /* Fixed width for the login form */
+}
+
+/* Input field styling */
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.25); /* Increased transparency for inputs */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit button styling */
+.btn-submit-login {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit-login:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .glass-container {
+        flex-direction: column; /* Stack elements on smaller screens */
+    }
+
+    .login-form-container {
+        width: 90%;
+        margin-top: 20px; /* Space between elements on smaller screens */
+    }
+}
+
+/* Signup template  style*/
+/* Full-page container */
+.signup-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Background image */
+.signup-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay on the image */
+}
+
+.signup-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+/* Form container */
+.signup-form-container {
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent box */
+    backdrop-filter: blur(5px);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Headings */
+.signup-heading {
+    font-size: 2rem;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.signup-subtitle {
+    font-size: 1.1rem;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+.signup-form .form-group {
+    margin-bottom: 20px;
+}
+
+/* Form inputs */
+.signup-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    background-color: transparent;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+.signup-input:focus {
+    outline: none;
+    border-bottom-color: #fff;
+}
+
+/* Checkbox */
+.signup-checkbox {
+    color: #ddd;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+/* Styling for the buttons */
+.signup-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Center the button */
+}
+
+.btn-signup {
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff; /* Blue color for the button */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-signup:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Remove the Sign In button for simplicity */
+.btn-signin {
+    display: none;
+}
+
+/* Already have an account? - text and Sign In link */
+.signin-redirect {
+    text-align: center;
+    margin-top: 20px;
+    color: gray;
+}
+
+.signin-redirect p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.btn-signin-link {
+    color: #007bff; /* Same blue as the signup button */
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.btn-signin-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .signup-form-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* General container for movie details */
+.movie-detail {
+    display: flex;
+    flex-wrap: wrap; /* Allows description to flow below if needed */
+    align-items: flex-start;
+    margin: 20px auto; /* Centers the container with top/bottom margin */
+    padding: 25px; /* Inner padding for spacing */
+    max-width: 1200px; /* Limit width for consistency */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    color: #f2f2f2; /* Sets text color for all content */
+}
+
+/* Movie thumbnail on the left */
+.movie-thumb {
+    flex: 0 0 150px; /* Fixed width for the thumbnail */
+    margin-right: 20px; /* Space between thumbnail and info */
+}
+
+.movie-thumb img {
+    border-radius: 10px; /* Rounded corners for the thumbnail */
+    width: 100%; /* Full width of the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Movie information beside the thumbnail */
+.movie-info {
+    flex: 1; /* Takes remaining space */
+}
+
+/* Movie title and year */
+.movie-info h4 {
+    font-size: 1.5em; /* Size for the title */
+    margin: 0;
+    font-weight: bold; /* Bold title */
+    color: #f2f2f2; /* Ensure title text is white */
+}
+
+/* Movie director */
+.movie-info h2 {
+    font-size: 1.2em; /* Size for director */
+    margin: 5px 0; /* Margin above/below */
+    color: #f2f2f2; /* Ensure director text is white */
+    margin-left: 0; /* Reset left margin if necessary */
+    text-align: left; /* Align text to the left */
+}
+
+/* Actors */
+.movie-info p {
+    font-size: 1.1em; /* Size for actors */
+    margin: 5px 0; /* Margin above/below */
+    color: #f2f2f2; /* Ensure actors text is white */
+    text-align: left; /* Align text to the left */
+    margin-left: 0; /* Reset left margin if necessary */
+}
+
+/* Movie description */
+.movie-desc {
+    flex-basis: 100%; /* Full width for the description */
+    margin-top: 15px; /* Space above the description */
+    text-align: left; /* Align text to the left */
+}
+
+.movie-desc p {
+    font-size: 1.1em; /* Size for description text */
+    line-height: 1.6; /* Line height for readability */
+    color: #f2f2f2; /* Ensure description text is white */
+    margin: 0; /* Reset margins to avoid spacing issues */
+    text-align: left; /* Reset left margin if necessary */
+}
+/* Prevent global p styles from affecting movie-desc paragraphs */
+.movie-desc p {
+    text-align: left; /* Force left alignment */
+}
+/* Reset the general paragraph styles affecting alignment */
+p {
+    text-align: inherit; /* Prevent overriding specific alignments */
+    color: #f8f9fa; /* Soft white for empty reviews message */
+    margin: 0; /* Reset margin */
+}
+/* General container for reviews */
+.review-container {
+    max-width: 800px; /* Limit the width of the reviews section */
+    margin: 0 auto; /* Center the container */
+    padding: 10px; /* Padding for inner spacing */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Heading */
+h2 {
+    color: #f8f9fa; /* Soft white heading */
+    font-size: 2em; /* Larger font size for the heading */
+    text-align: center; /* Centered heading */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
+/* Review box styles */
+.review-box {
+    background-color: #4e545b; /* Darker background for each review box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Inner padding for each review */
+    margin-bottom: 10px; /* Space between reviews */
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+/* User name styles */
+.user-name {
+    font-weight: bold; /* Bold user names */
+    color: #e9ecef; /* Light gray for contrast */
+}
+
+/* Rating styles */
+.rating {
+    color: #ffd700; /* Gold color for stars */
+    font-size: 1.2em; /* Slightly larger stars */
+}
+
+/* Comment styles */
+.comment {
+    color: #d3d3d3; /* Softer gray for comments */
+    margin-top: 10px; /* Space above the comment */
+}
+
+/* Hover effect for review boxes */
+.review-box:hover {
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Empty reviews message */
+p {
+    color: #f8f9fa; /* Soft white for empty reviews message */
+    text-align: center; /* Center the empty message */
+    margin-top: 20px; /* Space above the message */
+}
+.movie-detail-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Bring modal above everything else */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Optional blur effect */
+     padding-top: 0px;
+}
+
+.movie-detail-modal .modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 80%; /* Adjust as necessary */
+    max-width: 600px; /* Optional max width */
+    background-color: white; /* White background */
+    border-radius: 8px; /* Optional rounded corners */
+     padding-top: 0px;
+}
+
+.movie-detail-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.movie-detail-modal .close:hover,
+.movie-detail-modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.review-iframe{
+    width: 100%;
+    height: 600px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    padding-top: 0px;
+}
+
+.movie-create-review .body{
+    background: white;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Optional blur effect */
+}
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%; /* Adjust width on smaller screens */
+        max-height: 80%; /* Adjust max-height on smaller screens */
+    }
+}
+
+.movies-container {
+    display: flex;
+    justify-content: center;  /* Center the movies grid horizontally */
+    margin: 20px;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));  /* Auto-fill columns, 200px min width */
+    gap: 30px;  /* Increased space between the movie items */
+    width: 100%;  /* Make sure the grid uses all available width */
+    max-width: 1200px;  /* Limit max width to keep things neat */
+}
+
+.movie {
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-thumb {
+    width: 100%;  /* Make the image responsive to the container */
+    height: auto;
+    transition: transform 0.3s ease;  /* Add smooth transform effect */
+    border-radius: 8px;  /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Add a subtle shadow */
+}
+
+.movie:hover {
+    transform: scale(1.05);  /* Scale up the entire movie box */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);  /* Add a more prominent shadow */
+}
+
+.movie-thumb:hover {
+    transform: scale(1.1);  /* Zoom the movie image slightly */
+}
+
+.movie h3 {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #f2f2f2;
+}
+
+/* add review style */
+/* Container for the form */
+.movie-create-review {
+    max-width: 500px; /* Limit width */
+    margin: 50px auto; /* Center horizontally and add some top margin */
+    padding: 20px; /* Inner padding */
+    border-radius: 12px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.9); /* White background with transparency */
+    backdrop-filter: blur(10px); /* Blurring effect behind the container */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+}
+
+/* Title styling */
+.movie-create-review h2 {
+    text-align: center; /* Center the heading */
+    color: #333; /* Dark color for text */
+    font-family: Monaco, monospace; /* Custom font */
+}
+
+/* Form styling */
+.site-form {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px; /* Space between fields */
+}
+
+/* Input field styling */
+.form-control {
+    width: 100%; /* Full width */
+    padding: 12px; /* Padding for comfort */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 6px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    font-family: Monaco, monospace; /* Custom font */
+    background: rgba(255, 255, 255, 0.8); /* Background with transparency */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Shadow effect on focus */
+}
+
+/* Error message styling */
+.error-message {
+    color: red; /* Error text color */
+    font-size: 0.9em; /* Slightly smaller font */
+    margin-top: 5px; /* Space above the error message */
+}
+
+/* Button styling */
+.btn-submit-review {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    padding: 12px; /* Padding */
+    border-radius: 6px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+    font-size: 16px; /* Font size */
+}
+
+.btn-submit-review:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .movie-create-review {
+        width: 90%; /* Make it responsive */
+    }
+}

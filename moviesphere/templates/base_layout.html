@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Sphere</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="wrapper">
+              <!-- Navbar -->
+        <nav class="navbar">
+            <!-- Logo on the left -->
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'ms-logo.png' %}" alt="Home Logo" class="logo-image" width="50">
+                </a>
+            </div>
+
+            <!-- Links on the right -->
+            <div class="user-options">
+                {% if user.is_authenticated %}
+                    <span class="greeting">Hello <strong>{{ user.username }}</strong></span>
+                    <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                        {%csrf_token %}
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'accounts:login' %}" method="get">
+                        <button type="submit" class="login-btn">Login</button>
+                    </form>
+                    <form action="{% url 'accounts:signup' %}" method="get">
+                        <button type="submit" class="signup-btn">Signup</button>
+                    </form>
+                {% endif %}
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

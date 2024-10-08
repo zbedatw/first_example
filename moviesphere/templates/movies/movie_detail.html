@@ -1,0 +1,175 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<div class ="movie-detail">
+    <div class="movie-thumb">
+        <img src="{{movie.thumb.url}}" width="150">
+    </div>
+    <div class="movie-info">
+        <h4> {{movie.title}} {{movie.year}} </h4>
+        <h2> by {{movie.director}} </h2>
+        <p> main actors : {{movie.actors}}</p>
+    </div>
+    <div class="movie-desc">
+        <p> {{movie.description}}</p>
+    </div>
+</div>
+
+ <!-- Add this modal structure inside your movie_detail template -->
+<div id="reviewModal" class="movie-detail-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe id="reviewFrame" class="review-iframe" src="" frameborder="0"></iframe>
+    </div>
+</div>
+<div id="editReviewModal" class="movie-detail-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe id="editReviewFrame" class="review-iframe" src="" frameborder="0" style="width: 100%;height: 600px;
+        border: none;padding: 0;margin: 0;"></iframe>
+    </div>
+</div>
+
+<div class="review-container">
+    <h2 class="mb-4">Movie Reviews</h2>
+     <!-- Button to create a review -->
+    <div style="text-align: left; margin-bottom: 20px;">
+        {% if user.is_authenticated %}
+            {% if user_review %}
+                <!-- If the user is logged in and has already submitted a review, show the "Edit Review" button -->
+                <a href="javascript:void(0)" class="btn btn-secondary" onclick="openReviewModal('{% url 'movies:edit-review' movie.id %}')">Edit Review</a>
+                 <!-- Delete Review Button -->
+                <a href="javascript:void(0)" class="btn btn-danger" onclick="confirmDeleteReview('{{ user_review.id }}','{{movie.id}}')">Delete Review</a>
+            {% else %}
+                <!-- If the user is logged in but did not review, show the "Add Review" button -->
+                <a href="javascript:void(0)" class="btn btn-primary" onclick="openReviewModal('{% url 'movies:create-review' movie.id %}')">Add Review</a>
+            {% endif %}
+        {% else %}
+            <!-- If the user is not logged in, show a prompt to add a review -->
+            <a href="javascript:void(0)" class="btn btn-primary" onclick="openReviewModal('{% url 'movies:create-review' movie.id %}')">Add Review</a>
+        {% endif %}
+    </div>
+
+    {% for review in movie.reviews.all %}
+    <div class="review-box">
+        <!-- User Name -->
+        <div class="user-name">{{ review.user.username }}</div>
+
+         <!-- Star Rating -->
+        <div class="rating">
+            {% for i in rating_range %}
+                {% if i <= review.rating %}
+                    <span>★</span>  <!-- Solid star for ratings <= review.rating -->
+                {% else %}
+                    <span>☆</span>  <!-- Empty star for ratings > review.rating -->
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Comment -->
+        <div class="comment">{{ review.comment }}</div>
+    </div>
+    {% empty %}
+    <p>No reviews yet.</p>
+    {% endfor %}
+</div>
+
+<!-- Add some CSS for the modal -->
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    background-color: white;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+<script>
+// Get the modal element for create review
+var modal = document.getElementById("reviewModal");
+// Get the modal element for edit review
+var editReviewModal = document.getElementById("editReviewModal");
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// Function to open the modal and load the URL in the iframe
+function openReviewModal(url) {
+    reviewFrame.src = url;
+    modal.style.display = "block";
+
+    // Listen for message from the iframe (for redirect handling)
+    window.addEventListener('message', function(event) {
+        if (event.data.success) {
+            // Close the modal
+            modal.style.display = "none";
+            // Redirect the parent window to the movie detail page
+            window.location.href = event.data.redirect_url;
+        }
+    });
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+    reviewFrame.src = ""; // Clear the iframe src to stop loading the page
+}
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        reviewFrame.src = ""; // Clear the iframe src
+    }
+}
+
+function confirmDeleteReview(reviewId,movieId) {
+    if (confirm("Are you sure you want to delete this review?")) {
+        fetch(`/movies/${movieId}/delete-review/${reviewId}/`, {
+        method: 'DELETE',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRFToken': '{{ csrf_token }}' // Ensure CSRF token is available
+        }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Log the response for debugging
+            if (data.success) {
+                window.location.href = window.location.href; // Reload the current page
+            } else {
+                alert("Error: " + (data.error || "There was an error deleting the review."));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("There was an error deleting the review.");
+        });
+    }
+}
+</script>
+{% endblock %}
